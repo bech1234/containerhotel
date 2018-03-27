@@ -1,0 +1,22 @@
+{
+	"authenticationMethod": "none",
+
+	"routes": [
+
+		{
+
+			"path": "/iotmms",
+
+			"target": {
+
+				"type": "destination",
+
+				"name": "iotmms"
+
+			},
+
+			"description": "IOT link"
+
+		}
+	]
+}

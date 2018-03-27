@@ -1,10 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head></head>
+	<head>
+		<title>
+			Container Hotel
+		</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+		
+		<script>
+			
+			var vm = {
+				hello : ko.observable("hello"),
+				world : ko.observable("world!")
+			};
+			
+			function init() {
+				ko.applyBindings(vm);
+			}
+			
+			function sendRequest() {
+				var req = new XMLHttpRequest();
+req.onerror = function (e) {console.log("error", e)};
+req.onload = function (e) {console.log(e)};
+req.open("POST", "/destinations/iotmms/v1/api/http/push/e49a1616-c2a5-40f8-a769-fe10dc81cd54");
+req.setRequestHeader("Authorization", "Bearer 70e695be2034a5ad1f4db46cfb5cc56a");
+req.send('{ "method" : "http", "messageType":"71cb1dd35fd2c32d9123","messages":[{"timestamp":"2018-03-18","red":true, "green":false, "blue":false}]}')
+
+			}
+		</script>
+		
+	</head>
 	
-	<body>
+	<body onload="init()">
 		
-		
+		Hello world!
+		<br>
+		<span data-bind="text: hello"></span>
 		
 	</body>
 	
