@@ -5,5 +5,10 @@
     "defaultLanguage": "",
     "defaultI18NPropertyFile": "",
     "resourceModelName": ""
+  },
+  "hcpdeploy": {
+    "account": "s0007342869trial",
+    "name": "containerhotel",
+    "lastVersionWeTriedToDeploy": "1"
   }
 }
