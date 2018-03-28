@@ -1,0 +1,7 @@
+{
+  "short_name": "Power Supply",
+  "name": "SCP IoT Power Supply Demo",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "landscape"
+}

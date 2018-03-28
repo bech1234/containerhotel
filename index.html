@@ -1,6 +1,9 @@
 <!doctype html>
 <html>
 	<head>
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no, minimal-ui">
+		<link rel="manifest" href="manifest.json">
 		<title>
 			Container Hotel
 		</title>
@@ -12,6 +15,8 @@
 			    background-color: #bbb;
 			    padding: 4px;
 			    margin: 2px;
+			    margin-right: -4px;
+			    margin-left: -4x;
 			    border-radius: 40px;
 			}
 			
@@ -73,6 +78,18 @@ div.workarea {
 }
 div.workarea-inner {
 	padding: 40px;
+}
+div.workarea-led {
+  background-color: #dddddd;
+  color: #333366;
+    border-radius: 40px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+div.workarea-inner-led {
+	padding: 20px;
+	padding-right: 25px;
 }
 		</style>
 		
@@ -169,18 +186,18 @@ div.workarea-inner {
 	
 	<body onload="init()">
 		<div class="centering">
-<div class="workarea" data-bind="visible: workarea.powerLeds">
-	<div class="workarea-inner">
+<div class="workarea-led" data-bind="visible: workarea.powerLeds">
+	<div class="workarea-inner-led">
 <div><center>Control power LEDs</center></div>
 <div>
-		<led-state params="value: led0"></led-state>
-		<led-state params="value: led1"></led-state>
-		<led-state params="value: led2"></led-state>
-		<led-state params="value: led3"></led-state>
-		<led-state params="value: led4"></led-state>
-		<led-state params="value: led5"></led-state>
-		<led-state params="value: led6"></led-state>
-		<led-state params="value: led7"></led-state>
+	<span data-bind='component: { name: "led-state", params: { value: led0 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led1 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led2 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led3 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led4 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led5 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led6 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led7 } }'></span>
 </div>
 </div>
 </div>
