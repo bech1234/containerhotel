@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="css/styling.css" type="text/css">
 		
 		<title>
-			Container Hotel
+			Power Supply
 		</title>
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
@@ -21,46 +21,46 @@
 	
 	<body onload="nnit.controller.pump('/init')">
 		<div class="centering">
-<div class="workarea-led" data-bind="visible: workarea.ledControl.active">
-	<div class="workarea-inner-led">
-<div><center>Control power LEDs</center></div>
-<div>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led0 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led1 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led2 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led3 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led4 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led5 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led6 } }'></span>
-	<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led7 } }'></span>
-</div>
-</div>
-</div>
+			<div class="workarea-led" data-bind="visible: workarea.ledControl.active">
+				<div class="workarea-inner-led">
+					<div><center>Control power LEDs</center></div>
+					<div>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led0 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led1 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led2 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led3 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led4 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led5 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led6 } }'></span>
+						<span data-bind='component: { name: "led-state", params: { value: workarea.ledControl.led7 } }'></span>
+					</div>
+				</div>
+			</div>
 
-<div class="workarea" data-bind="visible: workarea.connectPowerSupply.active">
-	<div class="workarea-inner">
-	Connect power supply
-</div>
-</div>
+			<div class="workarea" data-bind="visible: workarea.connectPowerSupply.active">
+				<div class="workarea-inner">
+					Connect power supply
+				</div>
+			</div>
 
-<div class="workarea-error" data-bind="visible: workarea.error.active">
-	<div class="workarea-inner-error">
-	Error
-	<br>
-	check database
-</div>
-</div>
-</div>
+			<div class="workarea-error" data-bind="visible: workarea.error.active">
+				<div class="workarea-inner-error">
+					Error
+					<br>
+					check database
+				</div>
+			</div>
+		</div>
 
-<template id="led-state-template">
-	<div class="led-chooser">
-		<div class="led-option led-off" data-bind="css: { 'led-chosen' : colour() == 'off' }, click: off"></div>
-		<div class="led-option led-green" data-bind="css: { 'led-chosen' : colour() == 'green' }, click: green"></div>
-		<div class="led-option led-blue" data-bind="css: { 'led-chosen' : colour() == 'blue' }, click: blue"></div>
-		<div class="led-option led-red" data-bind="css: { 'led-chosen' : colour() == 'red' }, click: red"></div>
-	</div>
-</template>
-		
+		<template id="led-state-template">
+			<div class="led-chooser">
+				<div class="led-option led-off" data-bind="css: { 'led-chosen' : colour() == 'off' }, click: off"></div>
+				<div class="led-option led-green" data-bind="css: { 'led-chosen' : colour() == 'green' }, click: green"></div>
+				<div class="led-option led-blue" data-bind="css: { 'led-chosen' : colour() == 'blue' }, click: blue"></div>
+				<div class="led-option led-red" data-bind="css: { 'led-chosen' : colour() == 'red' }, click: red"></div>
+			</div>
+		</template>
+				
 	</body>
 	
 </html>
