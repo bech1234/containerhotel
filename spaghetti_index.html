@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no, minimal-ui">
+		
+		<link rel="manifest" href="manifest.json">
+		<title>
+			Container Hotel
+		</title>
+		
+		<style>
+			.led-chooser {
+				display: inline-block;
+			    width: fit-content;
+			    background-color: #bbb;
+			    padding: 4px;
+			    margin: 2px;
+			    margin-right: -4px;
+			    margin-left: -4x;
+			    border-radius: 40px;
+			}
+			
+			.led-option {
+			    border: 1px solid black;
+			    height: 40px;
+			    width: 40px;
+			    border-radius: 40px;
+			    padding: 2px;
+			    margin: 4px;
+			}
+			.led-off {
+			    background-color: #aaaaaa;
+			}
+			.led-green {
+			    background: #33aa33;
+			}
+			.led-red {
+			    background: #aa3333;
+			}
+			.led-blue {
+			    background: #3333aa;
+			}
+			.led-off.led-chosen {
+			    background-color: #eeeeee;
+			}
+			.led-green.led-chosen {
+			    background: #66ff66;
+			}
+			.led-red.led-chosen {
+			    background: #ff6666;
+			}
+			.led-blue.led-chosen {
+			    background: #9999ff;
+			}
+
+body {
+	background: linear-gradient(to right, #555588, #333366 25%, #000033);
+}
+
+div.centering {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.workarea {
+  background-color: #dddddd;
+  color: #333366;
+    border-radius: 80px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+div.workarea-inner {
+	padding: 40px;
+}
+div.workarea-led {
+  background-color: #dddddd;
+  color: #333366;
+    border-radius: 40px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+div.workarea-inner-led {
+	padding: 20px;
+	padding-right: 25px;
+}
+		</style>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+		
+		<script>
+			
+			var vm = {
+				workarea : {
+					connectPowerSupply : ko.observable(true),
+					powerLeds : ko.observable(false)
+				},
+				led0 : ko.observable("off"),
+				led1 : ko.observable("off"),
+				led2 : ko.observable("off"),
+				led3 : ko.observable("off"),
+				led4 : ko.observable("off"),
+				led5 : ko.observable("off"),
+				led6 : ko.observable("off"),
+				led7 : ko.observable("off")
+			};
+			
+			function init() {
+				ko.components.register('led-state', {
+				    viewModel: function(params) {
+				        this.colour = params.value;
+
+				        this.off = function() { this.colour('off'); }.bind(this);
+				        this.red = function() { this.colour('red'); }.bind(this);
+				        this.green = function() { this.colour('green'); }.bind(this);
+				        this.blue = function() { this.colour('blue'); }.bind(this);
+				    },
+				    template: { element: 'led-state-template' }
+				});
+				ko.applyBindings(vm);
+				for (var i = 0; i < 8; i++) {
+					vm["led"+i].subscribe(sendLedState);
+				}
+
+				requestPowerOn();
+			}
+			
+			function sendLedState() {
+				var req = new XMLHttpRequest();
+				var payload = '{ "method" : "ws", "messageType":"625f0f906dca05bc6ee7","messages":[{';
+
+				for (var i = 0; i < 8; i++) {
+					payload+= (i > 0 ? ', ' : '') + '"led' + i + '" : "' + vm["led"+i]() + '"';
+				}
+				
+				payload+= '}]}';
+				
+				req.responseType = "json";
+				req.open("POST", "/iotmms/v1/api/http/push/1f6c92c7-9c8f-4072-ba08-ea709528a624");
+				req.setRequestHeader("Authorization", "Bearer 70e695be2034a5ad1f4db46cfb5cc56a");
+				req.send(payload);
+
+			}
+			
+			var skips = 0;
+			
+			function receivePowerOn(e) {
+				var pol = JSON.parse(e.target.response).d.results;
+				
+				if (pol.length == 0) {
+					setTimeout(requestPowerOn, 1000);
+					return;
+				}
+				
+				if (skips == 0) {
+					skips+= pol.length;
+					requestPowerOn();
+					return;
+				}
+
+				skips+= pol.length;
+				
+				vm.workarea.connectPowerSupply(false);
+				vm.workarea.powerLeds(true);
+			}
+			
+			function requestPowerOn() {
+				var req = new XMLHttpRequest();
+				req.onerror = function (e) {console.log("error", e)};
+				req.onload = receivePowerOn;
+				req.open("GET", "/iotmms/v1/api/http/app.svc/T_IOT_7AE4915C16862CF47D5B?$format=json&$skip=" + skips);
+				req.setRequestHeader("Authorization", "Bearer 70e695be2034a5ad1f4db46cfb5cc56a");
+				req.send();
+			}
+			
+		</script>
+		
+	</head>
+	
+	<body onload="init()">
+		<div class="centering">
+<div class="workarea-led" data-bind="visible: workarea.powerLeds">
+	<div class="workarea-inner-led">
+<div><center>Control power LEDs</center></div>
+<div>
+	<span data-bind='component: { name: "led-state", params: { value: led0 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led1 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led2 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led3 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led4 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led5 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led6 } }'></span>
+	<span data-bind='component: { name: "led-state", params: { value: led7 } }'></span>
+</div>
+</div>
+</div>
+
+<div class="workarea" data-bind="visible: workarea.connectPowerSupply">
+	<div class="workarea-inner">
+	Connect power supply
+</div>
+</div>
+</div>
+
+<template id="led-state-template">
+	<div class="led-chooser">
+		<div class="led-option led-off" data-bind="css: { 'led-chosen' : colour() == 'off' }, click: off"></div>
+		<div class="led-option led-green" data-bind="css: { 'led-chosen' : colour() == 'green' }, click: green"></div>
+		<div class="led-option led-blue" data-bind="css: { 'led-chosen' : colour() == 'blue' }, click: blue"></div>
+		<div class="led-option led-red" data-bind="css: { 'led-chosen' : colour() == 'red' }, click: red"></div>
+	</div>
+</template>
+		
+	</body>
+	
+</html>

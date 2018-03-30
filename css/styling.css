@@ -1,0 +1,112 @@
+.led-chooser {
+    display: inline-block;
+    width: fit-content;
+    background-color: #bbb;
+    padding: 4px;
+    margin: 2px;
+    margin-right: -4px;
+    margin-left: -4x;
+    border-radius: 40px;
+}
+
+.led-option {
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    padding: 2px;
+    margin: 4px;
+}
+
+.led-off {
+    background-color: #aaaaaa;
+}
+
+.led-green {
+    background: #33aa33;
+}
+
+.led-red {
+    background: #aa3333;
+}
+
+.led-blue {
+    background: #3333aa;
+}
+
+.led-off.led-chosen {
+    background-color: #eeeeee;
+}
+
+.led-green.led-chosen {
+    background: #66ff66;
+}
+
+.led-red.led-chosen {
+    background: #ff6666;
+}
+
+.led-blue.led-chosen {
+    background: #9999ff;
+}
+
+body {
+    background: linear-gradient(to right, #555588, #333366 25%, #000033);
+}
+
+div.centering {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.workarea {
+    background-color: #dddddd;
+    color: #333366;
+    border-radius: 80px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+
+div.workarea-inner {
+    padding: 40px;
+}
+
+div.workarea-error {
+    background: repeating-linear-gradient( -45deg, yellow, yellow 30px, black 30px, black 60px);
+    color: #333366;
+    border-radius: 120px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+
+div.workarea-inner-error {
+    background-color: black;
+    margin: 80px 60px;
+    padding: 40px;
+    border-radius: inherit;
+    color: yellow;
+    font-size: 150%;
+    text-align: center;
+}
+
+div.workarea-led {
+    background-color: #dddddd;
+    color: #333366;
+    border-radius: 40px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+
+div.workarea-inner-led {
+    padding: 20px;
+    padding-right: 25px;
+}
