@@ -2,6 +2,7 @@
 */
 
 nnit.vm = {
+	active : true,
 	workarea: {
 		error : {
 			active: ko.observable(false)

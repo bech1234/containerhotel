@@ -33,7 +33,14 @@ function Controller() {
 			return;
 		}
 
-		var forward = mapping.action.execute(context);
+		var forward = null;
+		
+		try {
+			forward = mapping.action.execute(context);
+		} catch (fail) {
+			console.log("Error in action:", fail); // eslint-disable-line no-console
+			self.pump("/error");
+		}
 		if (!forward) {
 			return;
 		}
