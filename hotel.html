@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		
+		<link rel="stylesheet" href="css/hotel.css" type="text/css">
+		
+		<title>
+			Hotel
+		</title>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+		
+		<script src="js/hotel-bom.js"></script>
+		<script src="js/hotel-controller.js"></script>
+		<script src="js/hotel-viewmodel.js"></script>
+
+	</head>
+	
+	<body onload="nnit.controller.pump('/init')">
+		<div class="centering" style="display: none;" data-bind="visible: workarea.hotel.active, with: workarea.hotel">
+			<div class="workarea-hotel" data-bind="visible: true">
+				<div class="workarea-inner" data-bind="foreach: rows">
+					<div data-bind="foreach: apartments">
+						<!-- ko if: type == 'plugin' -->
+						<div class="plugin">
+							<svg height="100" width="100" xmlns="http://www.w3.org/2000/svg" style="width:100px;height:100px;">
+								<path transform="scale(0.0977)" d="M1003.386 204.664l-0.905-0.905c-24.744-24.744-64.861-24.744-89.605 0l-45.707 45.707-90.51-90.51 45.707-45.707c24.744-24.744 24.744-64.861 0-89.605l-0.905-0.905c-24.744-24.744-64.861-24.744-89.605 0l-47.973 47.973C621.76 29.553999999999974 537.237 36.34000000000003 482.502 91.07399999999996l-24.89 24.89c-109.011 109.011-121.948 277.692-38.854 400.892l-4.138 4.138c-62.392 62.392-62.484 163.493-0.275 225.999 12.41 12.469 12.642 33.327 0.121 45.683-12.509 12.343-32.655 12.292-45.101-0.153l-89.427-89.427c-62.637-62.638-164.63-63.747-227.299-1.141-62.542 62.479-62.562 163.829-0.058 226.332l8.763 8.763c24.744 24.744 64.861 24.744 89.605 0l0.905-0.905c24.744-24.744 24.744-64.861 0-89.605l-8.292-8.292c-12.329-12.329-13.085-32.418-1.098-45.081 12.437-13.138 33.174-13.353 45.882-0.645l89.328 89.328c62.92 62.92 165.504 63.814 228.081 0.553 61.793-62.468 61.65-163.161-0.431-225.451-12.55-12.592-12.777-32.866-0.207-45.437l4.151-4.151c123.2 83.095 291.881 70.158 400.892-38.854l24.89-24.89c54.734-54.735 61.52-139.258 20.362-201.382l47.973-47.973C1028.129 269.525 1028.129 229.40700000000004 1003.386 204.664zM889.796 498.368c-37.49 37.49-98.274 37.49-135.765 0L527.757 272.09400000000005c-37.49-37.49-37.49-98.274 0-135.765 29.556-29.556 73.585-35.804 109.269-18.759l-41.839 41.839c-24.744 24.744-24.744 64.861 0 89.604l0.905 0.905c24.744 24.744 64.861 24.744 89.605 0l45.707-45.707 90.51 90.51-45.707 45.707c-24.744 24.744-24.744 64.861 0 89.605l0.905 0.905c24.744 24.744 64.861 24.744 89.604 0l41.839-41.839C925.6 424.782 919.351 468.812 889.796 498.368z"/>
+							</svg>
+						</div>
+						<!-- /ko -->
+
+						<!-- ko if: type == 'empty' -->
+						<div class="empty"></div>
+						<!-- /ko -->
+						<!-- ko if: type == 'house' -->
+						<div data-bind="css: classes" style="position: relative;">
+							<svg height="12" width="12" style="position: absolute; right: 8px; bottom:6px;cursor:pointer;" data-bind="click: nnit.controller.koCallback('/house/eject')">
+							  <polygon points="1,11 11,11 11,9 1,9" class="eject"/>
+							  <polygon points="1,7 11,7 6,2" class="eject"/>
+							</svg>
+
+						<!-- ko if: container() == null -->
+							<div class="container-space" data-bind="text: name.substring(7)"></div>
+						<!-- /ko -->
+						<!-- ko if: container() != null -->
+							<div data-bind="css: container().classes, click: nnit.controller.koCallback('/house/container-info')"></div>
+						<!-- /ko -->
+						</div>
+						<!-- /ko -->
+						
+						<!-- ko if: type == 'power-supply' -->
+						<div class="power-supply">
+							<div class="led"></div>
+						</div>
+						<!-- /ko -->
+						
+						<!-- ko if: type == 'arrow-left' -->
+						<div class="arrow-left">
+							<svg height="100" width="100">
+							  <polygon points="0,50 40,10 40,30 80,30, 80,70, 40,70 40,90" class="bounce-left"/>
+							</svg>
+						</div>
+						<!-- /ko -->
+						
+						<!-- ko if: type == 'arrow-down' -->
+						<div class="arrow-down">
+							<svg height="100" width="100">
+							  <polygon points="50,100 10,60 30,60 30,20, 70,20, 70,60 90,60" class="bounce-down"/>
+							</svg>
+						</div>
+						<!-- /ko -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- ko if: workarea.container.active -->
+		<div class="centering" style="display: none;" data-bind="visible: workarea.container.active, click: function (data, event) { nnit.controller.pump('/hotel/show', event);}, with: workarea">
+			<div class="workarea-container">
+				<div class="workarea-inner">
+					<h1>Container</h1>
+					<div data-bind="with: container.house">
+						<div class="attribute">
+							<div class="name">
+								Color
+							</div>
+							<div class="value" data-bind="with: container">
+								<select data-bind="value: payload.color">
+									<option value="unknown">Select a color</option>
+									<option value="white">White</option>
+									<option value="light-grey">Light grey</option>
+									<option value="dark-grey">Dark grey</option>
+									<option value="black">Black</option>
+									<option value="red">Red</option>
+									<option value="green">Green</option>
+									<option value="blue">Blue</option>
+									<option value="yellow">Yellow</option>
+								</select>
+							</div>
+						</div>
+						<div class="attribute">
+							<div class="name">
+								Cargo
+							</div>
+							<div class="value">
+								<input type="text" data-bind="textInput: container().payload.cargo">
+							</div>
+						</div>
+						<div class="attribute">
+							<div class="name">
+							Notes
+							</div>
+							<div class="value">
+								<textarea rows="4" data-bind="textInput: container().payload.notes"></textarea>
+							</div>
+						</div>
+						<div class="save">
+							<button data-bind="click: nnit.controller.callback('/container/save', container())">Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- /ko -->
+		
+
+<!-- ko if: workarea.picking.active -->
+		<div class="centering" style="display: none;" data-bind="visible: workarea.picking.active, click: function (data, event) { nnit.controller.pump('/hotel/show', event);}, with: workarea">
+			<div class="workarea-picking">
+				<div class="workarea-inner">
+					<table style="width: 100%">
+						<tr>
+							<td valign="top" style="width: 25%">
+					<div class="column">
+					<h1>Picking</h1>
+					<p>
+						<button data-bind="click: nnit.controller.callback('/pick/execute')">Pick</button>
+						<button data-bind="click: nnit.controller.callback('/hotel/show', null)">Cancel</button>
+					</p>
+					</div>
+							</td>
+							<td valign="top">
+					<div class="column">
+						<h3>Selected</h3>
+						<!-- ko foreach: picking.selected -->
+						<div data-bind="css: classes, click: nnit.controller.koCallback('/pick/deselect')"><div class="text" data-bind="text: payload.cargo"></div></div>
+						<!-- /ko -->
+					</div>
+							</td>
+							<td valign="top">
+					<div class="column" id="c">
+						<h3>Available</h3>
+						<!-- ko foreach: picking.available -->
+						<div data-bind="css: classes, click: nnit.controller.koCallback('/pick/select')"><div class="text" data-bind="text: payload.cargo"></div></div>
+						<!-- /ko -->
+					</div>
+							</td>
+						</tr>
+					</table>
+					
+					
+				</div>
+			</div>
+		</div>
+<!-- /ko -->
+		
+		<div style="position: absolute; z-index: 999;" data-bind="visible: watchers.constructing">
+			<button data-bind="click: nnit.controller.callback('/end-construction', null)">
+				Construction
+			</button>
+		</div>
+		<div style="position: absolute; z-index: 999;" data-bind="visible: !watchers.constructing()">
+			<button data-bind="click: nnit.controller.callback('/force/ps-online', null)">
+				PS
+			</button>
+		</div>
+
+
+		<div style="
+		position: absolute; 
+		z-index: 999; 
+		left: 20px; 
+		bottom: 20px; 
+		border: 2px solid black; 
+		height: 60px; 
+		width: 40px;
+	    background-color: white;
+		" data-bind="click: nnit.controller.callback('/pick/new')"></div>
+
+
+		<div style="
+		position: absolute; 
+		z-index: 998; 
+		right: 0; 
+		bottom: 0; 
+		border: 2px solid black; 
+		height: 120px; 
+		width: 120px;
+	    background: repeating-linear-gradient( -45deg, yellow, yellow 30px, black 30px, black 60px);
+		"></div>
+
+		<div style="
+		position: absolute; 
+		z-index: 999; 
+		right: 10px; 
+		bottom: 10px; 
+		background-color: red; 
+		border: 2px solid black; 
+		height: 100px; 
+		width: 100px;
+		border-radius: 100px;
+		text-align: center; 
+		font: 24px Verdana; 
+		color: white; 
+		font-weight: bold;
+		background-image: radial-gradient(circle, red 50%, darkred 70%, black);
+		cursor: pointer;" 
+		data-bind="click: nnit.controller.callback('/force/panic', null)">
+			<span style="text-align: center;
+			    position: relative;
+			    top: 30%;
+				cursor: pointer;
+			">Panic</span>
+		</div>
+
+		
+		<div class="workarea-error" data-bind="visible: workarea.error.active" style="visibility: hidden;">
+			<div class="workarea-inner-error">
+				Error
+				<br>
+				check database
+			</div>
+		</div>
+
+
+	</body>
+	
+</html>

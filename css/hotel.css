@@ -1,0 +1,455 @@
+body {
+    background: linear-gradient(to right, #555588, #333366 25%, #000033);
+}
+
+div.centering {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.workarea-hotel {
+    background-color: #dddddd;
+    font: bold 48px Verdana;
+    color: #333366;
+    border-radius: 80px;
+    height: fit-items;
+    width: fit-items;
+}
+
+div.workarea-container {
+    background-color: #dddddd;
+    font: 24px Verdana;
+    color: #333366;
+    border-radius: 80px;
+    height: fit-items;
+    width: fit-items;
+    align-items: left;
+}
+
+
+div.workarea-picking {
+	position: absolute;
+    background-color: #dddddd;
+    font: 24px Verdana;
+    color: #333366;
+    border-radius: 80px;
+    top: 100px;
+    bottom: 100px;
+    left: 100px;
+    right: 100px;
+    align-text: center;
+}
+
+.workarea-picking .column {
+	background-color: #eeeeee;
+	border: 2px solid black;
+	border-radius: 40px;
+	margin: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	display: inline-block;
+	width: 75%;
+}
+
+.workarea-picking .container {
+	position: relative;
+	border: none;
+	border-radius: 40px;
+	width: 100%;
+	height: 50px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.workarea-picking .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+div.workarea-inner {
+    padding: 40px;
+}
+
+div.workarea-error {
+    background: repeating-linear-gradient( -45deg, yellow, yellow 30px, black 30px, black 60px);
+    color: #333366;
+    border-radius: 120px;
+    font: bold 48px Verdana;
+    height: fit-items;
+    width: fit-items;
+}
+
+div.workarea-inner-error {
+    background-color: black;
+    margin: 80px 60px;
+    padding: 40px;
+    border-radius: inherit;
+    color: yellow;
+    font-size: 150%;
+    text-align: center;
+}
+
+
+div.empty {
+    width: 108px;
+    height: 108px;
+   	background-color: #dddddd; 
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    overflow: hidden;
+    animation-name: empty-animation;
+    animation-duration: 2s;
+}
+
+div.house {
+    width: 100px;
+    height: 100px;
+    animation-name: house-animation;
+    animation-duration: 2s;
+    border: 4px solid black;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    overflow: hidden;
+	
+}
+
+.yellow {
+    background-color: yellow;
+    color: black;
+}
+.purple {
+    background-color: purple;
+    color: white;
+}
+.black {
+    background-color: black;
+    color: white;
+}
+.green {
+    background-color: green;
+    color: white;
+}
+.blue {
+    background-color: blue;
+    color: white;
+}
+.red {
+    background-color: red;
+    color: white;
+}
+.white {
+    background-color: white;
+    color: black;
+}
+.light-grey {
+    background-color: #cccccc;
+    color: black;
+}
+.dark-grey {
+    background-color: #777777;
+    color: white;
+}
+
+
+div.container-space {
+    width: 60px;
+    height: 60px;
+    animation-name: container-space;
+    animation-duration: 2s;
+    background-color: #dddddd;
+	background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+	background-size: 20px 20px;
+	background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 2px;
+    text-align: center;
+    color: rgba(0,0,0, 0.7);
+}
+@keyframes container-space {
+	0% {
+    opacity: 0;
+    }
+	99% {
+    opacity: 0;
+    }
+	100% {
+    opacity: 1;
+    }
+}
+
+.workarea-hotel div.container {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+
+@keyframes house-animation {
+    from {
+    	width: 1px;
+    	height: 1px; 
+    	border-radius: 5px; 
+    	margin-top: 50px;
+    	margin-left: 50px;
+    }
+    
+    to {
+    	width: 100px; 
+    	height: 100px; 
+    	border-radius: 20px; 
+    	margin-top: 5px;
+    	margin-left: 5px;
+    }
+}
+
+@keyframes empty-animation {
+    from {
+    	width: 1px;
+    	height: 1px; 
+    	border-radius: 5px; 
+    	margin-top: 50px;
+    	margin-left: 50px;
+    }
+    
+    to {
+    	width: 108px; 
+    	height: 108px; 
+    	border-radius: 20px; 
+    	margin-top: 5px;
+    	margin-left: 5px;
+    }
+}
+
+@keyframes ps-animation {
+    from {
+    	background-color: black; 
+    	width: 1px;
+    	height: 1px; 
+    	border-radius: 5px; 
+    	margin-top: 50px;
+    	margin-left: 50px;
+    }
+    
+    to {
+    	background-color: white; 
+    	width: 100px; 
+    	height: 100px; 
+    	border-radius: 20px; 
+    	margin-top: 5px;
+    	margin-left: 5px;
+    }
+}
+
+div.power-supply {
+	display: inline-block;
+    height: 100px;
+    width: 100px;
+    border-radius: 20px;
+    animation-name: ps-animation;
+    animation-duration: 2s;
+    vertical-align: top;
+    
+   	background-color: white; 
+    border: 4px solid black;
+    margin-top: 5px;
+    margin-left: 5px;
+    overflow: hidden;
+
+}
+
+div.led {
+	display: block;
+	width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #0000ff;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-name: ledblink;
+    animation-duration: 4s;
+}
+
+@keyframes ledblink {
+	0% {
+    opacity: 0;
+    }
+	49% {
+    opacity: 0;
+    }
+	50% {
+    opacity: 1;
+    }
+	100% {
+    opacity: 1;
+    }
+}
+
+@keyframes bounce-left {
+	0% {
+    transform: translate(100px, 0px);
+    fill-opacity: 0;
+    }
+    
+	10% {
+    fill: #dddddd;
+    fill-opacity: 0;
+    }
+    
+    100% {
+    transform: translate(0px, 0px);
+    fill-opacity: 0.8;
+    }
+}
+
+@keyframes bounce-down {
+	0% {
+    transform: translate(0px, -100px);
+    fill-opacity: 0;
+    }
+    
+	10% {
+    fill: #dddddd;
+    fill-opacity: 0;
+    }
+    
+    100% {
+    transform: translate(0px, 0px);
+    fill-opacity: 0.8;
+    }
+}
+
+.bounce-left {
+    fill: #aaaaaa;
+    animation-name: bounce-left;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.bounce-down {
+    fill: #aaaaaa;
+    animation-name: bounce-down;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+
+div.arrow-left {
+	display: inline-block;
+    height: 108px;
+    width: 108px;
+    animation-name: al-animation;
+    animation-duration: 4s;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-left: 0px;
+    overflow: hidden;
+
+}
+div.arrow-down {
+	display: inline-block;
+    height: 108px;
+    width: 108px;
+    animation-name: ad-animation;
+    animation-duration: 4s;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-left: 5px;
+    overflow: hidden;
+
+}
+
+
+.workarea-container h1 {
+	margin-top: 5px;
+}
+
+.value input,select,textarea {
+	background-color: white;
+	font: 24px Verdana;
+	width: 300px;
+	border: none;
+	border-radius: 10px;
+	padding: 5px 15px;
+}
+
+.value select {
+	width: 330px;
+}
+
+.workarea-container input:focus,select:focus,textarea:focus {
+	outline: none;
+}
+
+.attribute {
+	border: 4px solid #333366;
+	font-weight: bold;
+	margin-bottom: 20px;
+	padding: 15px;
+	border-radius: 30px;
+}
+
+.name {
+	padding-bottom: 10px;
+}
+
+.value {}
+
+.save {
+	width: 100%;
+	text-align: right;
+}
+
+.save button {
+	background-color: white;
+	font: 24px Verdana;
+	border: none;
+	border-radius: 20px;
+	font-weight: bolder;
+	color: #333366;
+	border: 4px solid #333366;
+	padding: 5px 15px;
+}
+
+.workarea-picking button {
+	background-color: white;
+	font: 24px Verdana;
+	border: none;
+	border-radius: 20px;
+	font-weight: bolder;
+	color: #333366;
+	border: 4px solid #333366;
+	padding: 5px 15px;
+}
+
+
+
+
+
+
+
+
